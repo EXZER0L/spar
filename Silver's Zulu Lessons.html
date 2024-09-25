@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Zulu - With Silver</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(https://img.freepik.com/free-vector/background-wave-minimalist-modern-style_483537-5220.jpg);
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }.navbar {
+            width: 100%;
+            background-color: #4CAF50;
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 20px;
+            position: absolute;
+            top: 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            background-color: #45a049;
+            border-radius: 5px;}
+
+        #home-page, #lesson-page, #game-page {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #b6f106;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 15px;
+        }
+
+        .section {
+            background-color: #f0e68c;
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .section:hover {
+            background-color: #ffeb3b;
+        }
+
+        #lesson-page h2 {
+            margin-top: 30px;
+            color: #b6f106;
+            font-size: 30px;
+        }
+
+        #word {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        #description {
+            font-size: 20px;
+            margin: 10px 0;
+            background-color: aqua;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: left;
+        }
+        #back-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #back-btn:hover {
+            background-color: #45a049;
+        }
+        #next-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #next-btn:hover {
+            background-color: #45a049;
+        }
+        #speech-btn{
+            padding: 10px 20px;
+            font-size: 9px;
+            background-color: #ff2204;
+            color: white;
+            border: 0.01px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        #goToHome{padding: 10px 20px;
+            font-size: 9px;
+            background-color: #ff0471;
+            color: white;
+            border: 0.01px;
+            border-radius: 30px;
+            cursor: pointer;}
+
+        /* Game Page */
+        
+        /* Responsive login card */
+        .login-card {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-card input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-card button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .streak {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 18px;
+            color: #f6ff00;
+        }
+        
+
+        /* Congratulatory Image */
+        .congrats {
+            display: none;
+            padding: 20px;
+        }
+
+        .congrats img {
+            width: 150px;
+        }
+        #con{
+            font-family: fantasy;
+            font-weight: bold;
+        
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#" onclick="toggleLogin()">Log in</a>
+    </div>
+
+    
+    <!-- Daily streak tracker -->
+    <div class="streak">🔥 Streak: 1 day</div>
+
+    <!-- Login card -->
+    <div class="login-card" id="login-card">
+        <h3>Log in</h3>
+        <input type="email" placeholder="Email" id="email">
+        <input type="password" placeholder="Password" id="password">
+        <button onclick="login()">Log in</button>
+    </div>
+
+    <div id="home-page">
+        <h1>Learn Zulu</h1>
+        <p>Select a section to begin learning:</p>
+        <div class="sections">
+            <div class="section" onclick="startSection(1)">⭐ Greetings</div>
+            <div class="section" onclick="startSection(2)">⭐ Items</div>
+            <div class="section" onclick="startSection(3)">⭐ Phrases</div>
+            <div class="section" onclick="startSection(4)">⭐ Sentences</div>
+            <div class="section" onclick="startSection(11)">⭐ Zulu Word Structure</div>
+            <div class="section" onclick="startSection(12)">⭐ Verbs</div>
+            <div class="section" onclick="startSection(13)">⭐ Nouns</div>
+            <div class="section" onclick="startSection(14)">⭐ Pronouns</div>
+            <div class="section" onclick="startSection(15)">⭐ Numbers</div>
+            
+        </div>
+    </div>
+
+    <!-- Lesson Page -->
+    <div id="lesson-page" style="display: none;">
+        <h2 id="lesson-title">Section</h2>
+        <p id="word">Sawubona</p>
+        <p id="description">Means 'Hello' in Zulu, a common greeting.</p>
+        <button id="speech-btn" onclick="speakWord()">Speech</button>
+        <button id="back-btn" onclick="prevWord()">Back</button>
+        <button id="next-btn" onclick="nextWord()">Next</button>
+
+        <!-- Congratulatory image -->
+        <div class="congrats">
+            <img src="https://th.bing.com/th/id/R.3cdf25ba6630cc7ab4fdb3dde4fc5d63?rik=Lj6V1ggXSSu9jA&pid=ImgRaw&r=0" alt="Congratulations!">
+            <p id="con"></p> Congratulations♥, you completed this section!☺</p>
+            <button id="goToHome" onclick="goToHome()">Return to Home</button>
+        </div>
+    </div>
+
+    <!-- Game Page -->
+   
+    <script>
+        
+        let currentSection = 1;
+        let currentIndex = 0;
+        let streak = 1;
+
+        const sections = {
+            1: [
+                { word: "Sawubona", description: "Means 'Hello' in Zulu, a common greeting." },
+                { word: "Yebo", description: "Means 'Yes' in Zulu." },
+                { word: "Sala kahle", description: "Means 'Goodbye (to someone staying)'." },
+                { word: "Hamba kahle", description: "Means 'Goodbye (to someone leaving)'." }
+            ],
+            2: [
+                { word: "Ikhaya", description: "Means 'Home'." },
+                { word: "Isikole", description: "Means 'School'." },
+                { word: "Isitolo", description: "Means 'Shop'." },
+                { word: "Indlu", description: "Means 'House'." }
+            ],
+            3: [
+                { word: "Ngicela", description: "Means 'Please'." },
+                { word: "Ngiyabonga", description: "Means 'Thank you'." },
+                { word: "Uxolo", description: "Means 'Sorry'." },
+                { word: "Awukho", description: "Means 'No problem'."
+                    
+                 }
+                 
+            ],
+            4: [
+                { word: "Ngifuna ukuphumula", description: "Means 'I want to rest'." },
+                { word: "Uphi umama?", description: "Means 'Where is mother?'." },
+                { word: "Ngicela amanzi", description: "Means 'I would like some water'." },
+                { word: "Uyaphi?", description: "Means 'Where are you going?'." }
+            ],
+            11: [
+                { word: "IsiZulu Noun Classes", description: "Zulu nouns are categorized into noun classes. For example, 'um-' for singular, and 'aba-' for plural." },
+                { word: "Umu- / Aba-", description: "Used for people and some animals (e.g., umuntu - person, abantu - people)." },
+                { word: "Isi- / Izi-", description: "Used for things and some animals (e.g., isikhwama - bag, izikhwama - bags)." }
+            ],
+            12: [
+                { word: "Hamba", description: "Means 'to go'." },
+                { word: "Funda", description: "Means 'to learn'." },
+                { word: "Thanda", description: "Means 'to love'." }
+            ],
+            13:[ 
+    { word: "Ikhaya", description: "Means 'Home'." },
+    { word: "Isikole", description: "Means 'School'." },
+    { word: "Imali", description: "Means 'Money'." },
+    { word: "Umtwana", description: "Means 'Child'." },
+    { word: "Inja", description: "Means 'Dog'." },
+    { word: "Indoda", description: "Means 'Man'." },
+    { word: "Umfazi", description: "Means 'Woman'." },
+    { word: "Imoto", description: "Means 'Car'." },
+    { word: "Izwe", description: "Means 'Country'." },
+    { word: "Isipho", description: "Means 'Gift'." }
+], 
+            14: [
+    { word: "Mina", description: "Means 'I'." },
+    { word: "Wena", description: "Means 'You' (singular)." },
+    { word: "Yena", description: "Means 'He/She'." },
+    { word: "Thina", description: "Means 'We'." },
+    { word: "Bona", description: "Means 'They'." },
+    { word: "Lona", description: "Means 'It'." },
+    { word: "Okwami", description: "Means 'Mine'." },
+    { word: "Okho", description: "Means 'Yours' (singular)." },
+    { word: "Okhe", description: "Means 'His/Hers'." },
+    { word: "Okthina", description: "Means 'Ours'." }
+],
+
+            15: [
+                { word: "Kunye", description: "Means 'One'." },
+                { word: "Kubili", description: "Means 'Two'." },
+                { word: "Kuthathu", description: "Means 'Three'." },
+                { word: "Kune", description: "Means 'Four'." },
+                { word: "Isihlanu", description: "Means 'Five'." },
+                { word: "Isithupha", description: "Means 'Six'." },
+                { word: "Isikhombisa", description: "Means 'Seven'." },
+                { word: "Isishiyagalombili", description: "Means 'Eight'." },
+                { word: "Isishiyagalolunye", description: "Means 'Nine'." },
+                { word: "Ishumi", description: "Means 'Ten'." },
+                { word: "Ishumi nanye", description: "Means 'Eleven'." },
+                { word: "Ishumi nambili", description: "Means 'Twelve'." },
+                { word: "Ishumi nantathu", description: "Means 'Thirteen'." },
+                { word: "Ishumi nane", description: "Means 'Fourteen'." },
+                { word: "Ishumi nanhlanu", description: "Means 'Fifteen'." },
+                { word: "Ishumi nesithupha", description: "Means 'Sixteen'." },
+                { word: "Ishumi nesikhombisa", description: "Means 'Seventeen'." },
+                { word: "Ishumi nesishiyagalombili", description: "Means 'Eighteen'." },
+                { word: "Ishumi nesishiyagalolunye", description: "Means 'Nineteen'." },
+                { word: "Amashumi amabili", description: "Means 'Twenty'." },
+                { word: "Amashumi amabili nanye", description: "Means 'Twenty-one'." },
+                { word: "Amashumi amabili nambili", description: "Means 'Twenty-two'." },
+                { word: "Amashumi amabili nantathu", description: "Means 'Twenty-three'." },
+                { word: "Amashumi amabili nane", description: "Means 'Twenty-four'." },
+                { word: "Amashumi amabili nanhlanu", description: "Means 'Twenty-five'." },
+                { word: "Amashumi amabili nesithupha", description: "Means 'Twenty-six'." },
+                { word: "Amashumi amabili nesikhombisa", description: "Means 'Twenty-seven'." },
+                { word: "Amashumi amabili nesishiyagalombili", description: "Means 'Twenty-eight'." },
+                { word: "Amashumi amabili nesishiyagalolunye", description: "Means 'Twenty-nine'." },
+                { word: "Amashumi amathathu", description: "Means 'Thirty'." },
+                { word: "Amashumi amathathu nanye", description: "Means 'Thirty-one'." },
+                { word: "Amashumi amathathu nambili", description: "Means 'Thirty-two'." },
+                { word: "Amashumi amathathu nantathu", description: "Means 'Thirty-three'." },
+                { word: "Amashumi amathathu nane", description: "Means 'Thirty-four'." },
+                { word: "Amashumi amathathu nanhlanu", description: "Means 'Thirty-five'." },
+                { word: "Amashumi amathathu nesithupha", description: "Means 'Thirty-six'." },
+                { word: "Amashumi amathathu nesikhombisa", description: "Means 'Thirty-seven'." },
+                { word: "Amashumi amathathu nesishiyagalombili", description: "Means 'Thirty-eight'." },
+                { word: "Amashumi amathathu nesishiyagalolunye", description: "Means 'Thirty-nine'." },
+                { word: "Amashumi amane", description: "Means 'Forty'." },
+                { word: "Amashumi amane nanye", description: "Means 'Forty-one'." },
+                { word: "Amashumi amane nambili", description: "Means 'Forty-two'." },
+                { word: "Amashumi amane nantathu", description: "Means 'Forty-three'." },
+                { word: "Amashumi amane nane", description: "Means 'Forty-four'." },
+                { word: "Amashumi amane nanhlanu", description: "Means 'Forty-five'." },
+                { word: "Amashumi amane nesithupha", description: "Means 'Forty-six'." },
+                { word: "Amashumi amane nesikhombisa", description: "Means 'Forty-seven'." },
+                { word: "Amashumi amane nesishiyagalombili", description: "Means 'Forty-eight'." },
+                { word: "Amashumi amane nesishiyagalolunye", description: "Means 'Forty-nine'." },
+                { word: "Amashumi amahlanu", description: "Means 'Fifty'." },
+                { word: "Amashumi amahlanu nanye", description: "Means 'Fifty-one'." },
+                { word: "Amashumi amahlanu nambili", description: "Means 'Fifty-two'." },
+                { word: "Amashumi amahlanu nantathu", description: "Means 'Fifty-three'." },
+                { word: "Amashumi amahlanu nane", description: "Means 'Fifty-four'." },
+                { word: "Amashumi amahlanu nanhlanu", description: "Means 'Fifty-five'." },
+                { word: "Amashumi amahlanu nesithupha", description: "Means 'Fifty-six'." },
+                { word: "Amashumi amahlanu nesikhombisa", description: "Means 'Fifty-seven'." },
+                { word: "Amashumi amahlanu nesishiyagalombili", description: "Means 'Fifty-eight'." },
+                { word: "Amashumi amahlanu nesishiyagalolunye", description: "Means 'Fifty-nine'." },
+                { word: "Amashumi ayisithupha", description: "Means 'Sixty'." },
+                { word: "Amashumi ayisithupha nanye", description: "Means 'Sixty-one'." },
+                { word: "Amashumi ayisithupha nambili", description: "Means 'Sixty-two'." },
+                { word: "Amashumi ayisithupha nantathu", description: "Means 'Sixty-three'." },
+                { word: "Amashumi ayisithupha nane", description: "Means 'Sixty-four'." },
+                { word: "Amashumi ayisithupha nanhlanu", description: "Means 'Sixty-five'." },
+                { word: "Amashumi ayisithupha nesithupha", description: "Means 'Sixty-six'." },
+                { word: "Amashumi ayisithupha nesikhombisa", description: "Means 'Sixty-seven'." },
+                { word: "Amashumi ayisithupha nesishiyagalombili", description: "Means 'Sixty-eight'." },
+                { word: "Amashumi ayisithupha nesishiyagalolunye", description: "Means 'Sixty-nine'." },
+                { word: "Amashumi ayisikhombisa", description: "Means 'Seventy'." },
+                { word: "Amashumi ayisikhombisa nanye", description: "Means 'Seventy-one'." },
+                { word: "Amashumi ayisikhombisa nambili", description: "Means 'Seventy-two'." },
+                { word: "Amashumi ayisikhombisa nantathu", description: "Means 'Seventy-three'." },
+                { word: "Amashumi ayisikhombisa nane", description: "Means 'Seventy-four'." },
+                { word: "Amashumi ayisikhombisa nanhlanu", description: "Means 'Seventy-five'." },
+                { word: "Amashumi ayisikhombisa nesithupha", description: "Means 'Seventy-six'." },
+                { word: "Amashumi ayisikhombisa nesikhombisa", description: "Means 'Seventy-seven'." },
+                { word: "Amashumi ayisikhombisa nesishiyagalombili", description: "Means 'Seventy-eight'." },
+                { word: "Amashumi ayisikhombisa nesishiyagalolunye", description: "Means 'Seventy-nine'." },
+                { word: "Amashumi ayisishiyagalombili", description: "Means 'Eighty'." },
+                { word: "Amashumi ayisishiyagalombili nanye", description: "Means 'Eighty-one'." },
+                { word: "Amashumi ayisishiyagalombili nambili", description: "Means 'Eighty-two'." },
+                { word: "Amashumi ayisishiyagalombili nantathu", description: "Means 'Eighty-three'." },
+                { word: "Amashumi ayisishiyagalombili nane", description: "Means 'Eighty-four'." },
+                { word: "Amashumi ayisishiyagalombili nanhlanu", description: "Means 'Eighty-five'." },
+                { word: "Amashumi ayisishiyagalombili nesithupha", description: "Means 'Eighty-six'." },
+                { word: "Amashumi ayisishiyagalombili nesikhombisa", description: "Means 'Eighty-seven'." },
+                { word: "Amashumi ayisishiyagalombili nesishiyagalombili", description: "Means 'Eighty-eight'." },
+                { word: "Amashumi ayisishiyagalombili nesishiyagalolunye", description: "Means 'Eighty-nine'." },
+                { word: "Amashumi ayisishiyagalolunye", description: "Means 'Ninety'." },
+                { word: "Amashumi ayisishiyagalolunye nanye", description: "Means 'Ninety-one'." },
+                { word: "Amashumi ayisishiyagalolunye nambili", description: "Means 'Ninety-two'." },
+                { word: "Amashumi ayisishiyagalolunye nantathu", description: "Means 'Ninety-three'." },
+                { word: "Amashumi ayisishiyagalolunye nane", description: "Means 'Ninety-four'." },
+                { word: "Amashumi ayisishiyagalolunye nanhlanu", description: "Means 'Ninety-five'." },
+                { word: "Amashumi ayisishiyagalolunye nesithupha", description: "Means 'Ninety-six'." },
+                { word: "Amashumi ayisishiyagalolunye nesikhombisa", description: "Means 'Ninety-seven'." },
+                { word: "Amashumi ayisishiyagalolunye nesishiyagalombili", description: "Means 'Ninety-eight'." },
+                { word: "Amashumi ayisishiyagalolunye nesishiyagalolunye", description: "Means 'Ninety-nine'." },
+                { word: "Ikhulu", description: "Means 'One hundred'." }
+            ]
+        };
+
+        function startSection(sectionId) {
+            currentSection = sectionId;
+            currentIndex = 0;
+            document.getElementById("lesson-title").innerText = `Section ${sectionId}`;
+            showWord();
+            document.getElementById("home-page").style.display = "none";
+            document.getElementById("lesson-page").style.display = "block";
+        }
+
+        function showWord() {
+            const wordObj = sections[currentSection][currentIndex];
+            document.getElementById("word").innerText = wordObj.word;
+            document.getElementById("description").innerText = wordObj.description;
+        }
+
+        function nextWord() {
+            currentIndex++;
+            if (currentIndex < sections[currentSection].length) {
+                showWord();
+            } else {
+                document.querySelector(".congrats").style.display = "block";
+                document.getElementById("next-btn").style.display = "none";
+            }
+        }
+
+        function goToHome() {
+            document.getElementById("lesson-page").style.display = "none";
+            document.getElementById("home-page").style.display = "block";
+            document.querySelector(".congrats").style.display = "none";
+            document.getElementById("next-btn").style.display = "inline-block";
+        }
+        function toggleLogin() {
+            const loginCard = document.getElementById('login-card');
+            loginCard.style.display = loginCard.style.display === 'none' ? 'block' : 'none';}
+
+        function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            if (email && password) {
+                alert('Successfully logged in!');
+                document.getElementById("login-card").style.display = "none";
+            } else {
+                alert('Please fill in both fields.');
+            }
+        }
+        function speakWord() {
+    const word = document.getElementById('word').innerText;
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'zu-ZA'; // Zulu language
+    window.speechSynthesis.speak(utterance);
+}
+function prevWord() {
+    // Decrease the currentIndex to go to the previous word
+    if (currentIndex > 0) {
+        currentIndex--; // Move back one word
+    } else {
+        alert("You are at the first word!"); // Optional: alert if at the first word
+    }
+    updateLessonContent();
+}
+
+
+
+
+function updateLessonContent() {
+    // Update the displayed word and description based on currentIndex
+    const currentWord = sections[currentSection][currentIndex];
+    document.getElementById('word').textContent = currentWord.word;
+    document.getElementById('description').textContent = currentWord.description;
+
+    // Optionally reset or adjust the buttons based on index
+    document.getElementById('back-btn').style.display = currentIndex > 0 ? 'inline' : 'none';
+}
+
+    </script>
+</body>
+</html>
+
